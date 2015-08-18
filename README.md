@@ -1,5 +1,8 @@
 ## go-github-streak
 
+`go-github-streak` is pacakge to get public cotributions from GitHub profile.  
+Conrtibutions include "Contributions in the last year", "Longest streak" and "Current streak."
+
 #### Documents
 
   - [github.com/hico-horiuchi/go-github-streak](http://godoc.org/github.com/hico-horiuchi/go-github-streak)
