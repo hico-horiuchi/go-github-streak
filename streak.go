@@ -1,3 +1,27 @@
+/*
+go-github-streak is pacakge to get public cotributions from GitHub profile.
+Conrtibutions include "Contributions in the last year", "Longest streak" and "Current streak."
+
+https://github.com/hico-horiuchi/go-github-streak
+
+  package main
+  
+  import (
+  	"fmt"
+  	streak "github.com/hico-horiuchi/go-github-streak"
+  )
+  
+  func main() {
+  	contributions, _ := streak.GetContributions("hico-horiuchi")
+  	fmt.Printf("%+v\n", contributions)
+  	// &{
+  	//     Contributions: 1185,
+  	//     LongestStreak: 13,
+  	//     CurrentStreak: 0,
+  	// }
+  }
+
+*/
 package streak
 
 import (
@@ -19,7 +43,7 @@ type Contributions struct {
 	CurrentStreak int `Current streak`
 }
 
-// Get public contributions.
+// Get public contributions from GitHub profile.
 func GetContributions(user string) (*Contributions, error) {
 	url := GITHUB_URL + "/" + user
 	request, err := http.NewRequest("GET", url, nil)
