@@ -5,12 +5,12 @@ Conrtibutions include "Contributions in the last year", "Longest streak" and "Cu
 https://github.com/hico-horiuchi/go-github-streak
 
   package main
-  
+
   import (
   	"fmt"
   	streak "github.com/hico-horiuchi/go-github-streak"
   )
-  
+
   func main() {
   	contributions, _ := streak.GetContributions("hico-horiuchi")
   	fmt.Printf("%+v\n", contributions)
@@ -45,32 +45,50 @@ type Contributions struct {
 
 // Get public contributions from GitHub profile.
 func GetContributions(user string) (*Contributions, error) {
-	url := GITHUB_URL + "/" + user
-	request, err := http.NewRequest("GET", url, nil)
+	var contributions Contributions
 
-	response, err := http.DefaultClient.Do(request)
-	if err != nil {
-		return nil, err
-	}
-	defer response.Body.Close()
-
-	body, err := ioutil.ReadAll(response.Body)
+	profile, err := getGitHubProfile(user)
 	if err != nil {
 		return nil, err
 	}
 
 	re := regexp.MustCompile(SPAN_PATTERN)
-	matches := re.FindAllStringSubmatch(string(body), -1)
-	return &Contributions{
-		Contributions: atoi(removeComma(matches[0][1])),
-		LongestStreak: atoi(removeComma(matches[1][1])),
-		CurrentStreak: atoi(removeComma(matches[2][1])),
-	}, nil
+	matches := re.FindAllStringSubmatch(profile, -1)
+
+	contributions.Contributions, err = strconv.Atoi(removeComma(matches[0][1]))
+	if err != nil {
+		return nil, err
+	}
+
+	contributions.LongestStreak, err = strconv.Atoi(removeComma(matches[1][1]))
+	if err != nil {
+		return nil, err
+	}
+
+	contributions.CurrentStreak, err = strconv.Atoi(removeComma(matches[1][1]))
+	if err != nil {
+		return nil, err
+	}
+
+	return &contributions, nil
 }
 
-func atoi(s string) int {
-	v, _ := strconv.Atoi(s)
-	return v
+func getGitHubProfile(user string) (string, error) {
+	url := GITHUB_URL + "/" + user
+	request, err := http.NewRequest("GET", url, nil)
+
+	response, err := http.DefaultClient.Do(request)
+	if err != nil {
+		return "", err
+	}
+	defer response.Body.Close()
+
+	body, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		return "", err
+	}
+
+	return string(body), nil
 }
 
 func removeComma(s string) string {
