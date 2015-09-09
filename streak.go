@@ -65,7 +65,7 @@ func GetContributions(user string) (*Contributions, error) {
 		return nil, err
 	}
 
-	contributions.CurrentStreak, err = strconv.Atoi(removeComma(matches[1][1]))
+	contributions.CurrentStreak, err = strconv.Atoi(removeComma(matches[2][1]))
 	if err != nil {
 		return nil, err
 	}
