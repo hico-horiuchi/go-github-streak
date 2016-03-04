@@ -1,6 +1,6 @@
 ## go-github-streak
 
-[![Circle CI](https://circleci.com/gh/hico-horiuchi/go-github-streak.svg?style=shield)](https://circleci.com/gh/hico-horiuchi/go-github-streak)
+[![GoDoc](https://godoc.org/github.com/hico-horiuchi/go-github-streak?status.svg)](https://godoc.org/github.com/hico-horiuchi/go-github-streak)  [![Circle CI](https://circleci.com/gh/hico-horiuchi/go-github-streak.svg?style=shield)](https://circleci.com/gh/hico-horiuchi/go-github-streak)
 
 `go-github-streak` is pacakge to get public contributions from GitHub profile.  
 Contributions include "Contributions in the last year", "Longest streak" and "Current streak."

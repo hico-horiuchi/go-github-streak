@@ -1,10 +1,15 @@
 package streak
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+)
 
 func TestGetContributions(t *testing.T) {
-	_, err := GetContributions("hico-horiuchi")
-	if err != nil {
-		t.Fatal("GetContributions() expects error: %q", err.Error())
-	}
+	assert := assert.New(t)
+	contributions, err := GetContributions("hico-horiuchi")
+
+	assert.Nil(err)
+	assert.NotNil(contributions)
 }
