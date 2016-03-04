@@ -5,7 +5,7 @@ machine:
 dependencies:
   override:
     - go get github.com/mattn/gom
-    - gom install
+    - gom -test install
 test:
   override:
     - gom test ./...

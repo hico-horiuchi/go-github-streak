@@ -1,5 +1,7 @@
-gom 'github.com/stretchr/testify/assert'
-
 group :development do
   gom 'golang.org/x/tools/cmd/goimports'
+end
+
+group :test do
+  gom 'github.com/stretchr/testify/assert'
 end
